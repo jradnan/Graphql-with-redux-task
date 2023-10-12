@@ -10,6 +10,8 @@ import Contact from "./components/Contact/Contact";
 import Watchlist from "./components/Watch list/Watchlist";
 import Watching from "./components/Watching/Watching";
 import Watched from "./components/Watched/Watched";
+import { store } from "./redux/app/store";
+import { Provider } from 'react-redux'
 const client = new ApolloClient({
   uri: "https://rickandmortyapi.com/graphql",
   cache: new InMemoryCache(),
@@ -46,8 +48,10 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <ApolloProvider client={client}>
-      <RouterProvider router={router} />
-    </ApolloProvider>
+    <Provider store={store}>
+      <ApolloProvider client={client}>
+        <RouterProvider router={router} />
+      </ApolloProvider>
+    </Provider>
   </React.StrictMode>
 );
