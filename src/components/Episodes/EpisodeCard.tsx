@@ -1,6 +1,7 @@
 import { useDispatch } from "react-redux";
 import { Episode } from "../../__generated__/graphql";
 import { addToWatchList,addToWatchedList } from "../../redux/WatchListSlice/WatchListSlice";
+import Swal from "sweetalert2";
 
 const EpisodeCard = ({
   episode,
@@ -13,10 +14,27 @@ const EpisodeCard = ({
   const dispatch = useDispatch();
 
   const handleAddToWatch = () => {
+    // Dispatch the action to add to the watchlist
     dispatch(addToWatchList(episode));
+
+    // Show a SweetAlert when added to the watchlist
+    Swal.fire({
+      icon: "success",
+      title: "Added to Watch List",
+      text: `You added ${episode.name} to your watch list.`,
+    });
   }
+
   const handleAddToWatchedList = () => {
+    // Dispatch the action to add to the watched list
     dispatch(addToWatchedList(episode));
+
+    // Show a SweetAlert when added to the watched list
+    Swal.fire({
+      icon: "success",
+      title: "Added to Watched List",
+      text: `You added ${episode.name} to your watched list.`,
+    });
   }
 
   return (
